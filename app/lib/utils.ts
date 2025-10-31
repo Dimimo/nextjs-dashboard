@@ -8,6 +8,10 @@ export const formatCurrency = (amount: number): string => {
     });
 };
 
+export const obfuscateEmail = (email: string): string => {
+    return email.replace('@', '_');
+}
+
 export const formatDateToLocal = (
     dateStr: string,
     locale: string = 'en-US',

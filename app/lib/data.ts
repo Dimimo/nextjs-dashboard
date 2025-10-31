@@ -1,6 +1,6 @@
 import postgres from 'postgres';
 import {CustomerField, CustomersTableType, InvoiceForm, InvoicesTable, LatestInvoiceRaw, Revenue,} from './definitions';
-import {formatCurrency} from './utils';
+import {formatCurrency, obfuscateEmail} from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, {ssl: 'require'});
 
@@ -38,6 +38,7 @@ export async function fetchLatestInvoices() {
         return data.map((invoice) => ({
             ...invoice,
             amount: formatCurrency(invoice.amount),
+            email: obfuscateEmail(invoice.email)
         }));
     } catch (error) {
         console.error('Database Error:', error);
