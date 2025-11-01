@@ -171,7 +171,7 @@ export async function fetchCustomers() {
             SELECT id,
                    name
             FROM customers
-            ORDER BY name ASC
+            ORDER BY name
         `;
     } catch (err) {
         console.error('Database Error:', err);
