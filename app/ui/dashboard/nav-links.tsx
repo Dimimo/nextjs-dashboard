@@ -1,6 +1,6 @@
 'use client';
 
-import {DocumentDuplicateIcon, HomeIcon, UserGroupIcon,} from '@heroicons/react/24/outline';
+import {DocumentDuplicateIcon, HomeIcon, UserGroupIcon, QuestionMarkCircleIcon, UsersIcon} from '@heroicons/react/24/outline';
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import clsx from "clsx";
@@ -22,6 +22,16 @@ const links = [
         name: 'Customers',
         href: '/dashboard/customers',
         icon: UserGroupIcon
+    },
+    {
+        name: 'Teams',
+        href: '/billiard/teams',
+        icon: UsersIcon
+    },
+    {
+        name: 'Test',
+        href: '/dashboard/test',
+        icon: QuestionMarkCircleIcon
     },
 ];
 
