@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import {GetDBSettings, IDBSettings} from "@/app/lib/billiard/route";
-import {Season, TeamTable} from "@/app/lib/billiard/definitions";
+import {SeasonTable, TeamTable} from "@/app/lib/billiard/definitions";
 
 const connectionParams: IDBSettings = GetDBSettings();
 
@@ -28,7 +28,7 @@ export async function fetchLatestSeason() {
         const connection = await mysql.createConnection(connectionParams);
         const sql = 'SELECT seasons.* FROM seasons ORDER BY id DESC LIMIT 1';
         let values: any[] = [];
-        const [rows] = await connection.execute(sql, values) as [Season[], any];
+        const [rows] = await connection.execute(sql, values) as [SeasonTable[], any];
         connection.end();
 
         return rows[0];
