@@ -1,9 +1,10 @@
 import mysql from 'mysql2/promise';
 import {GetDBSettings, IDBSettings} from "@/app/lib/billiard/route";
+import {Season, TeamTable} from "@/app/lib/billiard/definitions";
 
 const connectionParams: IDBSettings = GetDBSettings();
 
-export async function fetchTeams(season: string) {
+export async function fetchTeams(season: bigint) {
     try {
         const connection = await mysql.createConnection(connectionParams);
         const sql = `SELECT teams.*, venues.name AS venue_name
@@ -12,7 +13,7 @@ export async function fetchTeams(season: string) {
                      WHERE teams.season_id = ?
                      ORDER BY teams.name`;
         let values: any[] = [season];
-        const [rows] = await connection.execute(sql, values);
+        const [rows] = await connection.execute(sql, values) as [TeamTable[], any];
         connection.end();
 
         return rows;
@@ -27,10 +28,10 @@ export async function fetchLatestSeason() {
         const connection = await mysql.createConnection(connectionParams);
         const sql = 'SELECT seasons.* FROM seasons ORDER BY id DESC LIMIT 1';
         let values: any[] = [];
-        const [season] = await connection.execute(sql, values);
+        const [rows] = await connection.execute(sql, values) as [Season[], any];
         connection.end();
 
-        return season;
+        return rows[0];
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch the latest season.');
