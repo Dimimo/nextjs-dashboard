@@ -1,9 +1,9 @@
 import {Season, TeamTable} from "@/app/lib/billiard/definitions";
-import {latestSeasonApi, teamsByLatestSeasonApi} from "@/app/lib/billiard/apis";
+import {fetchLatestSeason, fetchTeams} from "@/app/lib/billiard/data";
 
 export default async function SeasonTeams() {
-    const season: Season = await latestSeasonApi();
-    const teams: TeamTable[] = await teamsByLatestSeasonApi();
+    const season: Season = await fetchLatestSeason();
+    const teams: TeamTable[] = await fetchTeams(season.id);
 
     return (
         <>
