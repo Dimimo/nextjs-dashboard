@@ -13,8 +13,8 @@ export type DateTable = {
     season_id: bigint,
     date: string,
     regular: boolean,
-    title: string,
-    remark: string,
+    title: string | null | undefined,
+    remark: string | null | undefined,
     created_at: string,
     updated_at: string,
 }
@@ -25,9 +25,10 @@ export type EventTable = {
     venue_id: bigint,
     team1: bigint,
     team2: bigint,
-    score1: number,
-    confirmed: number,
-    remark: string,
+    score1: number | null | undefined,
+    score2: number | null | undefined,
+    confirmed: boolean,
+    remark: string | null | undefined,
     created_at: string,
     updated_at: string,
 }
@@ -35,8 +36,11 @@ export type EventTable = {
 export type VenueTable = {
     id: bigint,
     name: string,
-    address: string,
-    contact_name: string,
+    user_id: bigint | null | undefined
+    address: string | null | undefined,
+    contact_name: string | null | undefined,
+    lat: string | null | undefined,
+    lng: string | null | undefined,
     created_at: string,
     updated_at: string,
 };
@@ -47,7 +51,7 @@ export type TeamTable = {
     players_count: number,
     venue_id: bigint,
     season_id: bigint,
-    remark: string | null,
+    remark: string | null | undefined,
     created_at: string,
     updated_at: string,
     venue_name: string,
@@ -57,12 +61,12 @@ export type UserTable = {
     id: bigint,
     name: string,
     email: string,
-    contact_nr: string,
+    contact_nr: string | null | undefined,
     gender: ['U', 'M', 'F', 'K']
-    last_game: string
-    email_verified_at: string,
+    last_game: Date,
+    email_verified_at: string | null | undefined,
     password: string,
-    remember_token: string,
+    remember_token: string | null | undefined,
     created_at: string,
     updated_at: string,
 
@@ -70,8 +74,8 @@ export type UserTable = {
 
 export type PlayerTable = {
     id: bigint,
-    user_id: bigint,
-    team_id: bigint,
+    user_id: bigint | null | undefined,
+    team_id: bigint | null | undefined,
     captain: boolean,
     active: boolean,
     created_at: string,
@@ -83,11 +87,11 @@ export type GameTable = {
     schedule_id: bigint,
     event_id: bigint,
     team_id: bigint,
-    player_id: bigint,
-    user_id: bigint,
+    player_id: bigint | null | undefined,
+    user_id: bigint | null | undefined,
     position: number,
     home: boolean,
-    win: boolean,
+    win: boolean | null | undefined,
     created_at: string,
     updated_at: string,
 }
@@ -111,7 +115,7 @@ export type FormatTable = {
     id: bigint,
     name: string,
     user_id: bigint,
-    details: string,
+    details: string | null | undefined,
     created_at: string,
     updated_at: string,
 }
@@ -139,7 +143,7 @@ export type PositionTable = {
 export type AdminTable = {
     id: bigint,
     user_id: bigint,
-    assigned_by: bigint,
+    assigned_by: bigint | null | undefined,
     super_admin: boolean,
     created_at: string,
     updated_at: string,
